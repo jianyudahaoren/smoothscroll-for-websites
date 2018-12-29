@@ -183,7 +183,7 @@ var lastScroll = Date.now();
  * Pushes scroll actions to the scrolling queue.
  */
 function scrollArray(elem, left, top) {
-    
+
     directionCheck(left, top);
 
     if (options.accelerationMax != 1) {
@@ -309,7 +309,7 @@ function wheel(event) {
     }
     
     var target = event.target;
-
+    
     // leave early if default action is prevented   
     // or it's a zooming event with CTRL 
     if (event.defaultPrevented || event.ctrlKey) {
@@ -327,6 +327,7 @@ function wheel(event) {
     var deltaX = -event.wheelDeltaX || event.deltaX || 0;
     var deltaY = -event.wheelDeltaY || event.deltaY || 0;
     
+
     if (isMac) {
         if (event.wheelDeltaX && isDivisible(event.wheelDeltaX, 120)) {
             deltaX = -120 * (event.wheelDeltaX / Math.abs(event.wheelDeltaX));
@@ -738,11 +739,11 @@ var userAgent = window.navigator.userAgent;
 var isEdge    = /Edge/.test(userAgent); // thank you MS
 var isChrome  = /chrome/i.test(userAgent) && !isEdge; 
 var isSafari  = /safari/i.test(userAgent) && !isEdge; 
+var isMozilla = /Mozilla/i.test(userAgent) && !isEdge;
 var isMobile  = /mobile/i.test(userAgent);
 var isIEWin7  = /Windows NT 6.1/i.test(userAgent) && /rv:11/i.test(userAgent);
 var isOldSafari = isSafari && (/Version\/8/i.test(userAgent) || /Version\/9/i.test(userAgent));
-var isEnabledForBrowser = (isChrome || isSafari || isIEWin7) && !isMobile;
-
+var isEnabledForBrowser = (isChrome || isSafari || isIEWin7 || isMozilla) && !isMobile;
 var wheelEvent;
 if ('onwheel' in document.createElement('div'))
     wheelEvent = 'wheel';
